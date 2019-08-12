@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          {{#if success}}
+              <div class="alert alert-success" role="alert">
+                  {{success}}
+              </div>
+          {{/if}}
+          <table class="table table-striped" id="myTable">
+            <thead>
+              <tr>
+                <th scope="col">Company</th>
+                <th scope="col">Position</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Date of Creation</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each rec}}
+                <tr>
+                  <td>{{this.company}}</td>
+                  <td>{{this.position}}</td>
+                  <td>{{this.salary}}</td>
+                  <td>{{this.dateOfCreation}}</td>
+                  <td>
+                      <form action="/recView" method="post"><input type="hidden" value='{{this._id}}' name="objId">
+                          <button type="submit">View</button>
+                      </form>
+                  </td>
+
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+      </div>
+    </div>
+</div>
+<script>
+    $(document).ready( function () {
+      $('#myTable').DataTable();
+    });
+</script>

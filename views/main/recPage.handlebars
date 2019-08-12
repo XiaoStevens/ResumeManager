@@ -1,0 +1,66 @@
+<div class="row">
+<div class="col-2">
+    <div class="nav flex-column nav-pills"  aria-orientation="vertical">
+        <a class="nav-link"   href="/home" >search</a>
+        <a class="nav-link"   href="/rec"   >upload</a>
+        <a class="nav-link"   href="/home/account"   >account</a>
+
+</div>
+</div>
+<div class="col-10">
+{{#if rec}}
+
+<form action="/recDel" method="post"><input type="hidden" value='{{rec._id}}' name="objId">
+<button type="submit" style="margin-left: 40px">Delete Record</button><br><br><br>
+</form>
+
+ <div class="container">
+   <p><label for="company">Company:</label>
+   {{rec.company}}</p>
+   <p><label for="position">Position:</label>
+   {{rec.position}}</p>
+  <p> <label for="jobDescription">Job Description:</label>
+   {{rec.jobDescription}}</p>
+   <p><label for="salary">Salary: $</label>
+   {{rec.salary}}</p>
+   <p><label for="dateOfCreation">Date of Creation:</label>
+   {{rec.dateOfCreation}}</p>
+   <p><label for="dateOfUpdation">Date of Updation:</label>
+   {{rec.dateOfUpdation}}</p>
+   <p><label for="">Download Resume:</label>
+   <a style ="padding: 5px" href='{{rec.resume}}'>
+        Download
+</a></p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Comments:</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each com}}
+      <tr>
+        <td>{{{this.commment}}}</td>
+        <td><form action="/comDel" method="post"><input type="hidden" value='{{{this._id}}}'name="objId"><input type="hidden" value='{{{this.rec_id}}}'name="RecId">
+        <button type="submit">Delete</button>
+        </form></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<form method="post" action="/crtCom">
+<div class="form-group">
+    <label for="comment">Add Comment:</label>
+    <input class="form-control" type="text" placeholder="Enter a Comment" name="comment" id="comment" rows="4" required>
+    <input type="hidden" value='{{rec._id}}'name="objId">
+    <button type="submit">Add</button>
+
+</div>
+</form>
+   </div>
+   {{/if}}
+</div>
+</div>
